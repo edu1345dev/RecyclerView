@@ -18,15 +18,19 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
 
         val alunos = getAlunos()
+
         recycler.layoutManager = LinearLayoutManager(this)
-        recycler.adapter = AlunosAdapter(alunos, this)
+        recycler.adapter = AlunosAdapter(alunos)
     }
 
     private fun getAlunos(): List<Aluno> {
         val alunosList = mutableListOf<Aluno>()
+
         for (index in 0..30) {
-            alunosList.add(Aluno(name = "Aluno $index", matricula = "Matricula $index"))
+            val aluno = Aluno("Aluno $index", "Matricula $index")
+            alunosList.add(aluno)
         }
+
         return alunosList.toList()
     }
 }

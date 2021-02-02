@@ -1,3 +1,3 @@
 package com.example.recyclerview
 
-data class Aluno(val name: String, val matricula: String)
+data class Aluno(val nome: String, val matricula: String)
