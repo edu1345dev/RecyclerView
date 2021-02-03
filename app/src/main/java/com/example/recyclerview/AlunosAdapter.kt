@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class AlunosAdapter(val alunosList: List<Aluno>) :
+class AlunosAdapter(private val alunosList: MutableList<Aluno>, val alunoSelected: (Aluno, Int) -> Unit) :
     RecyclerView.Adapter<AlunosAdapter.AlunoViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -25,8 +25,16 @@ class AlunosAdapter(val alunosList: List<Aluno>) :
 
         val matricula = holder.matricula
         matricula.text = alunosList[position].matricula
+
+        holder.itemView.setOnClickListener {
+            alunoSelected(alunosList[position], position)
+        }
     }
 
+    fun addAluno() {
+        alunosList.add(0, Aluno("Aluno ${alunosList.size}", "Matrícula ${alunosList.size}"))
+        notifyDataSetChanged()
+    }
 
     inner class AlunoViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val name by lazy { view.findViewById<TextView>(R.id.tv_name) }
