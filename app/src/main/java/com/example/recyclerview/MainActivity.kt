@@ -24,10 +24,19 @@ class MainActivity : AppCompatActivity() {
 
         recycler.layoutManager = LinearLayoutManager(this)
 
+        //adapter with lambda function
         val adapter = AlunosAdapter(alunos) { aluno, position ->
             Toast.makeText(this@MainActivity, "$aluno, position = $position", Toast.LENGTH_LONG)
                 .show()
         }
+
+        //adapter with interface
+        val adapterInterface = AlunosAdapterWithInterface(alunos, object : OnAlunoSelected{
+            override fun retrieveAlunoAndPosition(aluno: Aluno, position: Int) {
+                Toast.makeText(this@MainActivity, "$aluno, position = $position", Toast.LENGTH_LONG)
+                    .show()
+            }
+        })
 
         recycler.adapter = adapter
 
